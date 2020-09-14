@@ -18,6 +18,17 @@ public class UserMasterDto {
     private  Long id;
 
     @JsonView({UserView.Create.class , UserView.Update.class , UserView.Read.class})
-    @NotBlank(message = "firstName cannot be null",groups = {UserValidator.Create.class})
+    @NotBlank(message = "Name cannot be null",groups = {UserValidator.Create.class,UserValidator.Login.class})
     private String name;
+
+    @NotBlank(message = "Password cannot be null",groups = {UserValidator.Create.class,UserValidator.Login.class})
+    @JsonView({UserView.Create.class , UserView.Update.class})
+    private String password;
+
+    @JsonView({UserView.Read.class , UserView.Update.class})
+    private String desc;
+
+    @JsonView({UserView.Read.class , UserView.Update.class})
+    private String token;
+
 }

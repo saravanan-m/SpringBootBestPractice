@@ -13,4 +13,5 @@ public interface UserMasterService {
     UserMasterDto getUserByName(String name) throws ResourceNotFound;
 
     List<UserMasterDto> getUsers();
+
 }

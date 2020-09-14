@@ -8,6 +8,7 @@ import com.best.practice.BestPractice.mappers.UserMasterMapper;
 import com.best.practice.BestPractice.repositories.UserMasterRepository;
 import com.best.practice.BestPractice.services.UserMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -21,6 +22,8 @@ public class UserMasterServiceImpl implements UserMasterService {
     @Autowired
     UserMasterRepository userMasterRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bcryptEncoder;
 
     @Override
     public UserMasterDto addUser(UserMasterDto userMasterDto) throws ResourceExist {
@@ -29,6 +32,7 @@ public class UserMasterServiceImpl implements UserMasterService {
             throw new ResourceExist("User name exist");
         }
         entity = UserMasterMapper.INSTANCE.toEntity(userMasterDto);
+        entity.setPassword(bcryptEncoder.encode(entity.getPassword()));
         entity = userMasterRepository.save(entity);
 
         return UserMasterMapper.INSTANCE.toDto(entity);

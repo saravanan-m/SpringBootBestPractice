@@ -17,4 +17,11 @@ public class UserMasterEntity extends AuditEntity {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "description")
+    private String desc;
+
 }
