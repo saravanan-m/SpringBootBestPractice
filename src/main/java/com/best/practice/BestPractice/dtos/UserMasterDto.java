@@ -31,4 +31,6 @@ public class UserMasterDto {
     @JsonView({UserView.Read.class , UserView.Update.class})
     private String token;
 
+    @JsonView({UserView.Create.class , UserView.Update.class , UserView.Read.class})
+    private AccountDto account;
 }
